@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/boulder.glb" type="PackedScene" id=1]
+[ext_resource path="res://addons/destruction/destruction.gd" type="Script" id=2]
+[ext_resource path="res://assets/boulder_broken.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.57746, 1.30379, 1 )
+
+[sub_resource type="CapsuleShape" id=1]
+
+[node name="boulder" instance=ExtResource( 1 )]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="boulderbox" type="Area" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20792, 0 )
+
+[node name="bouldershape" type="CollisionShape" parent="boulderbox" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.417244, 0 )
+shape = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Sphere" index="0"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Sphere/StaticBody" index="0"]
+transform = Transform( 1.50268, 0, 0, 0, 1.2183, 0, 0, 0, 1.42185, 0, 0.366553, 0 )
+shape = SubResource( 1 )
+
+[node name="Destruction" type="Node" parent="." index="2"]
+script = ExtResource( 2 )
+shard_scene = ExtResource( 3 )

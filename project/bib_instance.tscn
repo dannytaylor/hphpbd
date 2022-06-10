@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://bib_instance.gd" type="Script" id=1]
+[ext_resource path="res://assets/bib_framesheet.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 23
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 23
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 23
+atlas = ExtResource( 2 )
+region = Rect2( 0, 256, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 23
+atlas = ExtResource( 2 )
+region = Rect2( 256, 256, 256, 256 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": false,
+"name": "hit",
+"speed": 1.0
+} ]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.298984, 0.175608, 1 )
+
+[node name="bib_instance" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="bib_area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09204, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="bib_area"]
+shape = SubResource( 6 )
+
+[connection signal="area_entered" from="bib_area" to="." method="_on_bib_area_area_entered"]

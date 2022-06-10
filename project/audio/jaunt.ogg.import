@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jaunt.ogg-f020e88bc3b1740c2501ce327dd66b85.oggstr"
+
+[deps]
+
+source_file="res://audio/jaunt.ogg"
+dest_files=[ "res://.import/jaunt.ogg-f020e88bc3b1740c2501ce327dd66b85.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

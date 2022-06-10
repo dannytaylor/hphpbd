@@ -1,0 +1,150 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/hp_framesheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/crown.png" type="Texture" id=4]
+
+[sub_resource type="BoxShape" id=1]
+margin = 1.0
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 512, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 0, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 512, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 0, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 512, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 1536, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 23
+atlas = ExtResource( 3 )
+region = Rect2( 1536, 512, 512, 512 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "jump_up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 12 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 14 ), SubResource( 12 ) ],
+"loop": true,
+"name": "punch",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": false,
+"name": "jaunt",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 11 ), SubResource( 15 ) ],
+"loop": false,
+"name": "cast",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "jump_down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "run",
+"speed": 6.0
+} ]
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 0.686804, 0.554795, 1 )
+
+[node name="Player" type="KinematicBody"]
+axis_lock_motion_z = true
+move_lock_z = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154322, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.418154, 0 )
+frames = SubResource( 2 )
+animation = "idle"
+playing = true
+
+[node name="crown" type="Sprite3D" parent="Sprite"]
+transform = Transform( 0.76728, -0.134988, 0, 0.134988, 0.76728, 0, 0, 0, 0.779063, 0.199003, 2.64616, 0 )
+visible = false
+flip_h = true
+texture = ExtResource( 4 )
+
+[node name="punchbox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176318, 0, -4.46254 )
+
+[node name="punchshape" type="CollisionShape" parent="punchbox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20929, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="Sprite3D" type="Sprite3D" parent="punchbox"]
+transform = Transform( 2.1074, 0, 0, 0, 3.44817, 0, 0, 0, 2.1074, 1.05557, 0, 0.816117 )
+visible = false
+texture = ExtResource( 2 )
+
+[connection signal="area_entered" from="punchbox" to="." method="_on_punchbox_area_entered"]
