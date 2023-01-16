@@ -1,0 +1,194 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://blocks.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/bldg2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/bldg1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/wall.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/bldg4.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/bldg3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/statue.tscn" type="PackedScene" id=8]
+[ext_resource path="res://WorldEnv.tres" type="Environment" id=9]
+[ext_resource path="res://assets/billboard.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Camera.gd" type="Script" id=11]
+[ext_resource path="res://assets/white.png" type="Texture" id=12]
+[ext_resource path="res://CRTShader.shader" type="Shader" id=13]
+[ext_resource path="res://assets/CRTFrame.png" type="Texture" id=14]
+[ext_resource path="res://assets/boulder.tscn" type="PackedScene" id=15]
+[ext_resource path="res://World.gd" type="Script" id=16]
+[ext_resource path="res://audio/jaunt.ogg" type="AudioStream" id=17]
+[ext_resource path="res://audio/music.ogg" type="AudioStream" id=18]
+[ext_resource path="res://audio/jump.ogg" type="AudioStream" id=19]
+[ext_resource path="res://audio/break.wav" type="AudioStream" id=20]
+[ext_resource path="res://audio/brawl.ogg" type="AudioStream" id=21]
+[ext_resource path="res://audio/bib.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/birthdayhat.png" type="Texture" id=23]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 13 )
+shader_param/screen_width = 800.0
+shader_param/screen_height = 600.0
+shader_param/BarrelPower = 1.1
+shader_param/color_bleeding = 1.2
+shader_param/bleeding_range_x = 2.0
+shader_param/bleeding_range_y = 3.0
+shader_param/lines_distance = 5.0
+shader_param/scan_size = 3.0
+shader_param/scanline_alpha = 0.98
+shader_param/lines_velocity = 15.0
+
+[node name="World" type="Spatial"]
+script = ExtResource( 16 )
+
+[node name="GridMap" type="GridMap" parent="."]
+visible = false
+mesh_library = ExtResource( 1 )
+cell_size = Vector3( 1, 1, 1 )
+cell_center_z = false
+data = {
+"cells": PoolIntArray( 10, 0, 0, 11, 0, 0, 65524, 0, 0, 65525, 0, 0, 65546, 0, 0, 65547, 0, 0, 131060, 0, 0, 131061, 0, 0, 131072, 0, 1, 131073, 0, 1, 131074, 0, 1, 131082, 0, 0, 131083, 0, 0, 196596, 0, 0, 196597, 0, 0, 196605, 0, 1, 196606, 0, 1, 196607, 0, 1, 196618, 0, 0, 196619, 0, 0, 262132, 0, 0, 262133, 0, 0, 262154, 0, 0, 262155, 0, 0, 327668, 0, 0, 327669, 0, 0, 327690, 0, 0, 327691, 0, 0, 393204, 0, 0, 393205, 0, 0, 393226, 0, 0, 393227, 0, 0, 458740, 0, 0, 458741, 0, 0, 458762, 0, 0, 458763, 0, 0, 524276, 0, 0, 524277, 0, 0, 524298, 0, 0, 524299, 0, 0, 589812, 0, 0, 589813, 0, 0, 589834, 0, 0, 589835, 0, 0, 655348, 0, 0, 655349, 0, 0, 655370, 0, 0, 655371, 0, 0, 720884, 0, 0, 720885, 0, 0, 720906, 0, 0, 720907, 0, 0, 786420, 0, 0, 786421, 0, 0, 786442, 0, 0, 786443, 0, 0, 851956, 0, 0, 851957, 0, 0, 851968, 0, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 917492, 0, 0, 917493, 0, 0, 917494, 0, 0, 917495, 0, 0, 917496, 0, 0, 917497, 0, 0, 917498, 0, 0, 917499, 0, 0, 917500, 0, 0, 917501, 0, 0, 917502, 0, 0, 917503, 0, 0, -2359291, 0, 0, -2359286, 0, 0, -2359285, 0, 0, -2293772, 0, 0, -2293771, 0, 0, -2293766, 0, 0, -2293755, 0, 0, -2293750, 0, 0, -2293749, 0, 0, -2228236, 0, 0, -2228235, 0, 0, -2228230, 0, 0, -2228219, 0, 0, -2228214, 0, 0, -2228213, 0, 0, -2162700, 0, 0, -2162699, 0, 0, -2162694, 0, 0, -2162683, 0, 0, -2162678, 0, 0, -2162677, 0, 0, -2097164, 0, 0, -2097163, 0, 0, -2097158, 0, 0, -2097147, 0, 0, -2097142, 0, 0, -2097141, 0, 0, -2031628, 0, 0, -2031627, 0, 0, -2031622, 0, 0, -2031611, 0, 0, -2031606, 0, 0, -2031605, 0, 0, -1966092, 0, 0, -1966091, 0, 0, -1966086, 0, 0, -1966075, 0, 0, -1966070, 0, 0, -1966069, 0, 0, -1900556, 0, 0, -1900555, 0, 0, -1900550, 0, 0, -1900539, 0, 0, -1900534, 0, 0, -1900533, 0, 0, -1835020, 0, 0, -1835019, 0, 0, -1835014, 0, 0, -1835003, 0, 0, -1834998, 0, 0, -1834997, 0, 0, -1769484, 0, 0, -1769483, 0, 0, -1769478, 0, 0, -1769467, 0, 0, -1769462, 0, 0, -1769461, 0, 0, -1703948, 0, 0, -1703947, 0, 0, -1703942, 0, 0, -1703931, 0, 0, -1703926, 0, 0, -1703925, 0, 0, -1638412, 0, 0, -1638411, 0, 0, -1638406, 0, 0, -1638395, 0, 0, -1638390, 0, 0, -1638389, 0, 0, -1572876, 0, 0, -1572875, 0, 0, -1572870, 0, 0, -1572859, 0, 0, -1572854, 0, 0, -1572853, 0, 0, -1507340, 0, 0, -1507339, 0, 0, -1507334, 0, 0, -1507323, 0, 0, -1507318, 0, 0, -1507317, 0, 0, -1441804, 0, 0, -1441803, 0, 0, -1441798, 0, 0, -1441787, 0, 0, -1441782, 0, 0, -1441781, 0, 0, -1376268, 0, 0, -1376267, 0, 0, -1376262, 0, 0, -1376251, 0, 0, -1376246, 0, 0, -1376245, 0, 0, -1310732, 0, 0, -1310731, 0, 0, -1310726, 0, 0, -1310715, 0, 0, -1310710, 0, 0, -1310709, 0, 0, -1245196, 0, 0, -1245195, 0, 0, -1245190, 0, 0, -1245179, 0, 0, -1245174, 0, 0, -1245173, 0, 0, -1179660, 0, 0, -1179659, 0, 0, -1179654, 0, 0, -1179643, 0, 0, -1179638, 0, 0, -1179637, 0, 0, -1114124, 0, 0, -1114123, 0, 0, -1114118, 0, 0, -1114107, 0, 0, -1114102, 0, 0, -1114101, 0, 0, -1048588, 0, 0, -1048587, 0, 0, -1048582, 0, 0, -1048571, 0, 0, -1048566, 0, 0, -1048565, 0, 0, -983052, 0, 0, -983051, 0, 0, -983046, 0, 0, -983035, 0, 0, -983030, 0, 0, -983029, 0, 0, -917516, 0, 0, -917515, 0, 0, -917510, 0, 0, -917499, 0, 0, -917494, 0, 0, -917493, 0, 0, -851980, 0, 0, -851979, 0, 0, -851974, 0, 0, -851963, 0, 0, -851958, 0, 0, -851957, 0, 0, -786444, 0, 0, -786443, 0, 0, -786438, 0, 0, -786427, 0, 0, -786422, 0, 0, -786421, 0, 0, -720908, 0, 0, -720907, 0, 0, -720902, 0, 0, -720891, 0, 0, -720886, 0, 0, -720885, 0, 0, -655372, 0, 0, -655371, 0, 0, -655366, 0, 0, -655355, 0, 0, -655350, 0, 0, -655349, 0, 0, -589836, 0, 0, -589835, 0, 0, -589830, 0, 0, -589819, 0, 0, -589814, 0, 0, -589813, 0, 0, -524300, 0, 0, -524299, 0, 0, -524294, 0, 0, -524283, 0, 0, -524278, 0, 0, -524277, 0, 0, -458764, 0, 0, -458763, 0, 0, -458758, 0, 0, -458747, 0, 0, -458742, 0, 0, -458741, 0, 0, -393228, 0, 0, -393227, 0, 0, -393222, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393206, 0, 0, -393205, 0, 0, -327692, 0, 0, -327691, 0, 0, -327686, 0, 0, -327685, 0, 0, -327684, 0, 0, -327683, 0, 0, -327682, 0, 0, -327681, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327670, 0, 0, -327669, 0, 0, -262156, 0, 0, -262155, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262134, 0, 0, -262133, 0, 0, -196620, 0, 0, -196619, 0, 0, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196598, 0, 0, -196597, 0, 0, -131084, 0, 0, -131083, 0, 0, -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131062, 0, 0, -131061, 0, 0, -65548, 0, 0, -65547, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65526, 0, 0, -65525, 0, 0, -12, 0, 0, -11, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.929145, -0.369714, 0, 0.369714, 0.929145, 0, 0, 0, 1, 4.90288, 11.8047, 17.2604 )
+light_energy = 0.4
+light_indirect_energy = 5.0
+light_specular = 0.0
+shadow_enabled = true
+shadow_bias = -1.0
+shadow_contact = 2.018
+directional_shadow_mode = 1
+directional_shadow_bias_split_scale = 0.233
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.49174, 1.33711, 0 )
+
+[node name="sfx" type="Node" parent="Player"]
+
+[node name="jaunt" type="AudioStreamPlayer" parent="Player/sfx"]
+stream = ExtResource( 17 )
+
+[node name="punch" type="AudioStreamPlayer" parent="Player/sfx"]
+stream = ExtResource( 21 )
+
+[node name="cast" type="AudioStreamPlayer" parent="Player/sfx"]
+stream = ExtResource( 22 )
+
+[node name="jump" type="AudioStreamPlayer" parent="Player/sfx"]
+stream = ExtResource( 19 )
+
+[node name="break" type="AudioStreamPlayer" parent="Player/sfx"]
+stream = ExtResource( 20 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02309, 16.5852 )
+current = true
+fov = 45.0
+script = ExtResource( 11 )
+
+[node name="objs" type="Spatial" parent="."]
+
+[node name="bldg1" parent="objs" instance=ExtResource( 4 )]
+transform = Transform( 1.50642, 0, 0, 0, 1, 0, 0, 0, 2.33704, -0.492283, -8.38384, -1.11878 )
+
+[node name="bldg2" parent="objs" instance=ExtResource( 3 )]
+transform = Transform( 2.04232, 0, 0, 0, 4.06573, 0, 0, 0, 2.04232, -15.0752, -7.09989, 0 )
+
+[node name="wall" parent="objs" instance=ExtResource( 5 )]
+transform = Transform( 6.26235, 0, 0, 0, 6.26235, 0, 0, 0, 6.26235, 0, -42.3022, -56.0994 )
+
+[node name="bldg4" parent="objs" instance=ExtResource( 6 )]
+transform = Transform( 4.0902, 0, 0, 0, 6.70245, 0, 0, 0, 4.0902, 15.2876, -9.89338, 0 )
+
+[node name="bldg3" parent="objs" instance=ExtResource( 7 )]
+transform = Transform( 9.61157, 0, 0, 0, 7.03616, 0, 0, 0, 7.03616, 13.2251, -18.0002, -29.4258 )
+
+[node name="statue" parent="objs" instance=ExtResource( 8 )]
+transform = Transform( 1.71037, 0, 2.44639, 0, 2.98499, 0, -2.44639, 0, 1.71037, -13.4871, -10.4558, -12.4889 )
+
+[node name="bldg5" parent="objs/statue" instance=ExtResource( 7 )]
+transform = Transform( 1.00715, 0, -0.725863, 0, 0.353931, 0, 1.44056, 0, 0.50748, 0.164857, -2.98587, 0.377452 )
+
+[node name="billboard" parent="objs" instance=ExtResource( 10 )]
+transform = Transform( 0.582026, 0, 0, 0, 0.716631, 0, 0, 0, 0.814697, 0, 0.0419939, -0.975396 )
+
+[node name="SpotLight" type="SpotLight" parent="objs/billboard"]
+transform = Transform( 1.71814, 0, 0, 0, 0.955638, -1.01683, 0, 0.894436, 0.840606, 0, 3.80053, 3.86313 )
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_specular = 0.2
+spot_range = 3.9499
+spot_angle = 60.0137
+
+[node name="SpotLight2" type="SpotLight" parent="objs/billboard"]
+transform = Transform( 1.62107, 0.414854, 0.389887, 0, 0.955638, -1.01683, -0.406721, 0.843906, 0.793117, 4.27446, 3.80053, 3.2723 )
+light_energy = 10.0
+light_indirect_energy = 2.0
+light_specular = 0.2
+spot_range = 4.18524
+spot_angle = 38.5971
+
+[node name="SpotLight3" type="SpotLight" parent="objs/billboard"]
+transform = Transform( 1.62, -0.41708, -0.391979, 0, 0.955638, -1.01683, 0.408903, 0.843346, 0.792591, -4.07455, 3.80053, 3.2723 )
+light_energy = 10.0
+light_indirect_energy = 2.0
+light_specular = 0.2
+spot_range = 4.18524
+spot_angle = 38.9194
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 9 )
+
+[node name="RespawnPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65623, 1.42762, 0 )
+
+[node name="BoulderPoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0516529, 3.29628, 8.59045 )
+
+[node name="BIBPoint" type="Spatial" parent="."]
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="bdayhats" type="CPUParticles2D" parent="UI"]
+position = Vector2( 459, -104 )
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+amount = 16
+lifetime = 12.0
+texture = ExtResource( 23 )
+emission_shape = 2
+emission_rect_extents = Vector2( 800, 1 )
+direction = Vector2( 0, 1 )
+spread = 0.0
+gravity = Vector2( 0, 1 )
+initial_velocity = 320.0
+initial_velocity_random = 0.5
+angular_velocity = 45.0
+
+[node name="CRT" type="TextureRect" parent="UI"]
+material = SubResource( 3 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 15.0712, 11.3576 )
+texture = ExtResource( 12 )
+
+[node name="CRTframe" type="TextureRect" parent="UI"]
+margin_right = 1082.0
+margin_bottom = 812.0
+rect_scale = Vector2( 0.891564, 0.89296 )
+texture = ExtResource( 14 )
+
+[node name="boulder" parent="." instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41369, 0.347166 )
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -18.0
+autoplay = true
+
+[editable path="boulder"]
